@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini CLI Slash Commands Guide</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --border-color: #30363d;
+            --text-main: #c9d1d9;
+            --text-dim: #8b949e;
+            --accent-color: #58a6ff;
+            --code-bg: #21262d;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--accent-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .version {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 15px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #f0f6fc;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .command {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 10px;
+            background-color: var(--code-bg);
+            padding: 4px 8px;
+            border-radius: 4px;
+            width: fit-content;
+        }
+
+        .description {
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .sub-commands {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Gemini CLI Slash Commands</h1>
+            <p>Gemini CLI에서 사용 가능한 모든 명령어를 정리한 가이드입니다.</p>
+            <span class="version">v0.42.0 기반</span>
+        </header>
+
+        <section class="section">
+            <h2>1. 세션 및 일반 제어</h2>
+            <div class="grid">
+                <div class="card">
+                    <span class="command">/help</span>
+                    <p class="description">CLI 사용법과 전체 명령어 목록을 표시합니다. (또는 /?)</p>
+                </div>
+                <div class="card">
+                    <span class="command">/about</span>
+                    <p class="description">현재 CLI 버전 및 시스템 정보를 출력합니다.</p>
+                </div>
+                <div class="card">
+                    <span class="command">/clear</span>
+                    <p class="description">화면과 시각적인 세션 기록을 지웁니다. (Ctrl+L)</p>
+                </div>
+                <div class="card">
+                    <span class="command">/quit</span>
+                    <p class="description">CLI를 종료합니다. --delete 플래그로 기록 삭제 가능.</p>
+                </div>
+                <div class="card">
+                    <span class="command">/stats</span>
+                    <p class="description">세션, 모델, 도구 사용 통계를 확인합니다.</p>
+                    <p class="sub-commands">Sub: session, model, tools</p>
+                </div>
+                <div class="card">
+                    <span class="command">/copy</span>
+                    <p class="description">마지막으로 출력된 내용을 클립보드에 복사합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>2. 대화 및 세션 관리</h2>
+            <div class="grid">
+                <div class="card">
+                    <span class="command">/resume</span>
+                    <p class="description">세션 브라우저를 열거나 체크포인트를 관리합니다.</p>
+                    <p class="sub-commands">Sub: save, list, resume, share</p>
+                </div>
+                <div class="card">
+                    <span class="command">/rewind</span>
+                    <p class="description">대화 기록을 탐색하며 이전 상태로 되돌립니다. (Esc 2번)</p>
+                </div>
+                <div class="card">
+                    <span class="command">/restore</span>
+                    <p class="description">도구 실행 전으로 파일을 복구합니다.</p>
+                </div>
+                <div class="card">
+                    <span class="command">/compress</span>
+                    <p class="description">대화 내용을 요약하여 컨텍스트 사용량을 줄입니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>3. 설정 및 환경 구성</h2>
+            <div class="grid">
+                <div class="card">
+                    <span class="command">/settings</span>
+                    <p class="description">인터랙티브 설정 편집기를 엽니다.</p>
+                </div>
+                <div class="card">
+                    <span class="command">/theme</span>
+                    <p class="description">CLI 테마를 변경하는 대화 상자를 표시합니다.</p>
+                </div>
+                <div class="card">
+                    <span class="command">/model</span>
+                    <p class="description">사용할 모델을 설정하거나 관리합니다.</p>
+                    <p class="sub-commands">Sub: manage, set &lt;model&gt;</p>
+                </div>
+                <div class="card">
+                    <span class="command">/directory</span>
+                    <p class="description">작업 디렉토리를 추가하거나 조회합니다.</p>
+                </div>
+                <div class="card">
+                    <span class="command">/auth</span>
+                    <p class="description">인증 방법을 변경합니다.</p>
+                </div>
+                <div class="card">
+                    <span class="command">/vim</span>
+                    <p class="description">Vim 입력 모드를 토글합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>4. 확장 및 고급 기능</h2>
+            <div class="grid">
+                <div class="card">
+                    <span class="command">/extensions</span>
+                    <p class="description">확장 기능을 설치, 활성화, 관리합니다.</p>
+                </div>
+                <div class="card">
+                    <span class="command">/mcp</span>
+                    <p class="description">MCP 서버와 도구를 관리합니다.</p>
+                </div>
+                <div class="card">
+                    <span class="command">/agents</span>
+                    <p class="description">서브에이전트 목록을 확인하고 설정합니다.</p>
+                </div>
+                <div class="card">
+                    <span class="command">/skills</span>
+                    <p class="description">에이전트 스킬을 관리합니다.</p>
+                </div>
+                <div class="card">
+                    <span class="command">/commands</span>
+                    <p class="description">사용자 정의 슬래시 명령어를 관리합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>5. 프로젝트 지원</h2>
+            <div class="grid">
+                <div class="card">
+                    <span class="command">/init</span>
+                    <p class="description">프로젝트 분석 후 GEMINI.md 파일을 생성합니다.</p>
+                </div>
+                <div class="card">
+                    <span class="command">/memory</span>
+                    <p class="description">GEMINI.md 기반의 지시 기억을 관리합니다.</p>
+                </div>
+                <div class="card">
+                    <span class="command">/plan</span>
+                    <p class="description">현재 작업 계획을 보거나 클립보드에 복사합니다.</p>
+                </div>
+                <div class="card">
+                    <span class="command">/bug</span>
+                    <p class="description">버그 리포트를 제출합니다.</p>
+                </div>
+                <div class="card">
+                    <span class="command">/docs</span>
+                    <p class="description">공식 문서를 브라우저에서 엽니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Gemini CLI Guide. Generated by Gemini CLI Agent.</p>
+        </footer>
+    </div>
+</body>
+</html>

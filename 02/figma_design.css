@@ -1,0 +1,84 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.home-container {
+    background-color: #f2f2f7; /* backgrounds/secondary---elevated */
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    color: black;
+}
+
+/* 상단 왼쪽 텍스트 블록 */
+.content-block {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    width: 199px;
+    height: 155px;
+    font-family: 'GyeonggiBatang', serif;
+    font-size: 10px;
+    line-height: 1.75;
+    text-decoration: none;
+    color: black;
+    overflow: hidden;
+    display: block;
+}
+
+.content-block p {
+    margin: 0;
+    word-break: break-all;
+}
+
+/* "abcd" 텍스트 */
+.title-text {
+    position: absolute;
+    left: 201px;
+    top: 196px;
+    font-family: 'Gabia_Sai', sans-serif;
+    font-size: 50px;
+    margin: 0;
+    white-space: nowrap;
+}
+
+/* 이미지 및 효과 영역 */
+.image-wrapper {
+    position: absolute;
+    left: 87px;
+    top: 323px;
+    width: 229px;
+    height: 229px;
+}
+
+.photo {
+    position: absolute;
+    width: 229px;
+    height: 229px;
+    overflow: hidden;
+}
+
+.photo img {
+    position: absolute;
+    width: 253px; /* 110.48% (inset -5.24%) */
+    height: 253px;
+    top: -12px;
+    left: -12px;
+}
+
+.effect {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 클릭 방지 */
+}
+
+.effect img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}

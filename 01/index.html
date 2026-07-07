@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <title>김지원의 홈페이지</title>
+
+    <style>
+      @font-face {
+        font-family: 'NexonMaplestory';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFLight.woff') format('woff');
+        font-weight: 300;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'NexonMaplestory';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff');
+        font-weight: 700;
+        font-display: swap;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'NexonMaplestory', sans-serif;
+        color: #4a5568;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 50px 20px;
+        position: relative;
+        overflow-x: hidden;
+        
+        /* 여름 느낌의 기본 베이스 배경색 */
+        background-color: #f0f7f4; 
+      }
+
+      /* ✨ 여름 햇살 모션 레이어 효과 */
+      body::before {
+        content: "";
+        position: fixed;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle at 30% 20%, rgba(255, 253, 230, 0.4) 0%, rgba(255, 243, 190, 0.15) 30%, transparent 60%),
+                    linear-gradient(135deg, rgba(224, 242, 241, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+        transform-origin: center center;
+        animation: summerSunlight 12s ease-in-out infinite alternate;
+        z-index: -1; /* 콘텐츠 뒤로 배치 */
+        pointer-events: none;
+      }
+
+      /* ☀️ 햇살이 일렁이는 움직임 애니메이션 */
+      @keyframes summerSunlight {
+        0% {
+          transform: rotate(0deg) scale(1);
+          opacity: 0.8;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          transform: rotate(8deg) scale(1.1);
+          opacity: 0.7;
+        }
+      }
+
+      .wrapper {
+        max-width: 580px;
+        width: 100%;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      h1.title {
+        color: #8e57f5; /* 햇살 배경과 잘 어울리도록 톤을 살짝 조정했습니다 */
+        font-size: 2.2rem;
+        margin-bottom: 5px;
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+      }
+
+      .emoji-line {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+      }
+
+      .top-info-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 15px;
+        margin-bottom: 25px;
+        text-align: left;
+      }
+
+      .info-card {
+        background-color: rgba(255, 255, 255, 0.9); /* 배경이 살짝 비치도록 반투명 처리 */
+        border: 2px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        backdrop-filter: blur(4px); /* 트렌디한 글래스모피즘 효과 */
+      }
+
+      .card-title {
+        font-size: 1rem;
+        color: #2d3748;
+        font-weight: 700;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .news-item {
+        font-size: 0.88rem;
+        line-height: 1.5;
+        color: #4a5568;
+        padding: 5px 0;
+        border-bottom: 1px dashed #edf2f7;
+      }
+      .news-item:last-child {
+        border-bottom: none;
+      }
+
+      .weather-card {
+        background-color: rgba(241, 249, 245, 0.85);
+        border-color: #c8e6c9;
+        justify-content: space-between;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.2s;
+      }
+
+      .weather-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(46, 125, 50, 0.1);
+      }
+
+      .weather-body {
+        text-align: center;
+        padding: 10px 0;
+      }
+
+      .weather-icon {
+        font-size: 2.2rem;
+        margin-bottom: 3px;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .weather-temp {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #1e7e34;
+      }
+
+      .weather-status {
+        font-size: 0.85rem;
+        color: #555;
+        margin-top: 2px;
+      }
+
+      .weather-link-tag {
+        font-size: 0.75rem;
+        color: #2e7d32;
+        text-align: center;
+        font-weight: 700;
+        margin-top: auto;
+      }
+
+      .qr-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px;
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #4a5568;
+        text-decoration: none;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        border: 1px solid #e2e8f0;
+        margin-bottom: 30px;
+        transition: all 0.2s;
+        backdrop-filter: blur(4px);
+      }
+      .qr-btn:hover {
+        background-color: #f7fafc;
+        border-color: #cbd5e0;
+      }
+
+      .divider {
+        font-size: 0.9rem;
+        color: #4a5568;
+        margin: 35px 0 15px 0;
+        border-bottom: 2px dashed #90a4ae;
+        padding-bottom: 6px;
+        font-weight: 700;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12px;
+        margin: 10px 0;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      }
+
+      .archive-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 15px;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        backdrop-filter: blur(4px);
+      }
+
+      .archive-list a {
+        color: #4a5568;
+        text-decoration: none;
+        font-size: 0.95rem;
+        padding: 4px 0;
+      }
+      .archive-list a:hover {
+        color: #8e57f5;
+        font-weight: 700;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-4px); }
+      }
+
+      @media (max-width: 480px) {
+        .top-info-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="wrapper">
+      <h1 class="title">김지원의 홈페이지</h1>
+      <div class="emoji-line">🤍(❁´◡`❁)💜</div>
+
+      <div class="top-info-grid">
+        <div class="info-card">
+          <div class="card-title">📢 오늘의 미니 뉴스</div>
+          <div class="news-item">✨ <b>[과제]</b> HTML/CSS 레이아웃 다듬기 성공!</div>
+          <div class="news-item">💻 <b>[다짐]</b> 기록이 쌓이면 나만의 이야기가 된다.</div>
+        </div>
+
+        <a href="https://search.naver.com/search.naver?query=날씨" target="_blank" class="info-card weather-card">
+          <div class="card-title">🌤️ 서울 날씨</div>
+          <div class="weather-body">
+            <div class="weather-icon">🌤️</div>
+            <div class="weather-temp">24°C</div>
+            <div class="weather-status">대체로 맑음</div>
+          </div>
+          <div class="weather-link-tag">NAVER 날씨 보기 ↗</div>
+        </a>
+      </div>
+
+      <a href="qr.html" class="qr-btn">📌 홈페이지 큐알코드 바로가기</a>
+
+      <div class="divider">▼ 과제물 (현재시간 스크린샷)</div>
+      <img src="now.png" alt="현재시간 스크린샷" />
+      <p style="font-size: 0.95rem; color: #4a5568; margin-top: 8px; font-weight: 700;">
+        오늘도 고생 많으셨습니다 내일도 파이팅 😊👍😁✌️
+      </p>
+
+      <div class="divider">▼ 사진넣기 작업물</div>
+      <img src="4.png" alt="오전 작업물" style="width: 180px;" />
+
+      <div class="divider">📅 지난 실습 파일 목록</div>
+      <div class="archive-list">
+        <a href="../../figma3.html" style="font-weight: bold; color: #8e57f5;">figma3.html (이미지 구현)</a>
+        <a href="01/ex1-3.html">ex1-3.html</a>
+        <a href="01/ex1-4.html">ex1-4.html</a>
+        <a href="01/ex1-5.html">ex1-5.html</a>
+        <a href="01/ex1-8.html">ex1-8.html</a>
+        <a href="01/ex1-9.html">ex1-9.html</a>
+        <a href="01/ex1-10.html">ex1-10.html</a>
+        <a href="01/ex1-11.html">ex1-11.html</a>
+        <a href="01/ex1-12.html">ex1-12.html</a>
+        <a href="01/ex1-18.html">ex1-18.html</a>
+        <a href="01/ex1-24.html">ex1-24.html</a>
+        <a href="01/ex1-25.html">ex1-25.html</a>
+        <a href="01/ex1-26.html">ex1-26.html</a>
+        <a href="01/ex1-34.html">ex1-34.html</a>
+        <a href="01/ex1-35.html">ex1-35.html</a>
+        <a href="01/ex1-37.html">ex1-37.html</a>
+        <a href="01/ex1-38.html">ex1-38.html</a>
+        <a href="01/ex1-39.html">ex1-39.html</a>
+        <a href="01/ex1-40.html">ex1-40.html</a>
+        <a href="01/ex1-41.html">ex1-41.html</a>
+        <a href="01/ex1-42.html">ex1-42.html</a>
+        <a href="01/ex1-43.html">ex1-43.html</a>
+        <a href="01/ex1-44.html">ex1-44.html</a>
+        <a href="01/ex1-45.html">ex1-45.html</a>
+
+        <a href="../02/ex2-1.html">ex2-1.html</a>
+        <a href="../02/ex2-5.html">ex2-5.html</a>
+        <a href="../02/ex2-6.html">ex2-6.html</a>
+        <a href="../02/ex2-7.html">ex2-7.html</a>
+        <a href="../02/ex2-8.html">ex2-8.html</a>
+        <a href="../02/ex2-9.html">ex2-9.html</a>
+        <a href="../02/ex2-10.html">ex2-10.html</a>
+        <a href="../02/ex2-11.html">ex2-11.html</a>
+        <a href="../02/ex2-12.html">ex2-12.html</a>
+        <a href="../02/ex2-14.html">ex2-14.html</a>
+        <a href="../02/ex2-14-1.html">ex2-14-1.html</a>
+        <a href="../02/ex2-15.html">ex2-15.html</a>
+        <a href="../02/ex2-16.html">ex2-16.html</a>
+        <a href="../02/ex2-17.html">ex2-17.html</a>
+        <a href="../02/ex2-18.html">ex2-18.html</a>
+        <a href="../02/ex2-19.html">ex2-19.html</a>
+        <a href="../02/ex2-20.html">ex2-20.html</a>
+        <a href="../02/ex2-21.html">ex2-21.html</a>
+        <a href="../02/ex2-22.html">ex2-22.html</a>
+        <a href="../02/quiz1.html">quiz1.html</a>
+      </div>
+    </div>
+
+  </body>
+</html>
