@@ -275,53 +275,72 @@
 
       <a href="qr.html" class="qr-btn">📌 홈페이지 큐알코드 바로가기</a>
 
-      <div class="divider">▼ 과제물 (현재시간 스크린샷)</div>
-      <img src="now.png" alt="현재시간 스크린샷" />
-      <p style="font-size: 0.95rem; color: #4a5568; margin-top: 8px; font-weight: 700;">
-        오늘도 고생 많으셨습니다 내일도 파이팅 😊👍😁✌️
-      </p>
+      <div class="divider">📊 프로젝트 요약</div>
+      <div class="info-card" style="margin-bottom:18px; text-align:left;">
+        <div class="card-title">프로젝트 통계</div>
+        <div style="font-size:0.95rem; padding:6px 0;">총 HTML 파일: <b>146</b></div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <div style="background:#fff; padding:8px 10px; border-radius:10px; border:1px solid #e2e8f0;">01/ : <b>31</b></div>
+          <div style="background:#fff; padding:8px 10px; border-radius:10px; border:1px solid #e2e8f0;">02/ : <b>91</b></div>
+          <div style="background:#fff; padding:8px 10px; border-radius:10px; border:1px solid #e2e8f0;">03-1/ : <b>19</b></div>
+          <div style="background:#fff; padding:8px 10px; border-radius:10px; border:1px solid #e2e8f0;">docs/ : <b>2</b></div>
+          <div style="background:#fff; padding:8px 10px; border-radius:10px; border:1px solid #e2e8f0;">path/ : <b>3</b></div>
+        </div>
+        <div style="margin-top:10px; font-size:0.88rem; color:#555;">요약: 각 폴더별 실습 파일을 모아 빠르게 확인할 수 있습니다. 아래 '전체 목록 보기'를 눌러 모든 파일을 확인하세요.</div>
+        <button id="show-all-pages" style="margin-top:12px; padding:8px 12px; border-radius:10px; border:1px solid #cbd5e0; background:#fff; cursor:pointer;">전체 목록 보기</button>
+      </div>
 
-      <div class="divider">▼ 사진넣기 작업물</div>
-      <img src="4.png" alt="오전 작업물" style="width: 180px;" />
+      <div id="all-pages" class="archive-list" style="display:none; max-height:340px; overflow:auto;">
+        <!-- 전체 페이지 목록은 pages.json이 있으면 로드합니다. -->
+        <div style="font-size:0.95rem; color:#666; padding:8px 0;">(페이지 로딩 중...)</div>
+      </div>
 
-      <div class="divider">📅 지난 실습 파일 목록</div>
+      <div class="divider">📂 대표 링크</div>
       <div class="archive-list">
-        <a href="../../figma3.html" style="font-weight: bold; color: #8e57f5;">figma3.html (이미지 구현)</a>
-        <a href="01/ex1-3.html">ex1-3.html</a>
-        <a href="01/ex1-4.html">ex1-4.html</a>
-        <a href="01/ex1-5.html">ex1-5.html</a>
-        <a href="01/ex1-8.html">ex1-8.html</a>
-        <a href="01/ex1-9.html">ex1-9.html</a>
-        <a href="01/ex1-10.html">ex1-10.html</a>
-        <a href="01/ex1-11.html">ex1-11.html</a>
-        <a href="01/ex1-12.html">ex1-12.html</a>
-        <a href="01/ex1-18.html">ex1-18.html</a>
-        <a href="01/ex1-24.html">ex1-24.html</a>
-        <a href="01/ex1-25.html">ex1-25.html</a>
-        <a href="01/ex1-26.html">ex1-26.html</a>
-        <a href="01/ex1-34.html">ex1-34.html</a>
-        <a href="01/ex1-35.html">ex1-35.html</a>
-        <a href="01/ex1-37.html">ex1-37.html</a>
-        <a href="01/ex1-38.html">ex1-38.html</a>
-        <a href="01/ex1-39.html">ex1-39.html</a>
-        <a href="01/ex1-40.html">ex1-40.html</a>
-        <a href="01/ex1-41.html">ex1-41.html</a>
-        <a href="01/ex1-42.html">ex1-42.html</a>
-        <a href="01/ex1-43.html">ex1-43.html</a>
-        <a href="01/ex1-44.html">ex1-44.html</a>
-        <a href="01/ex1-45.html">ex1-45.html</a>
+        <a href="01/">01 폴더</a>
+        <a href="02/">02 폴더</a>
+        <a href="03-1/">03-1 폴더</a>
+        <a href="docs/">docs 폴더</a>
+        <a href="path/">path 폴더</a>
+        <a href="index.html">홈 (요약)</a>
+      </div>
 
-        <a href="../02/ex2-1.html">ex2-1.html</a>
-        <a href="../02/ex2-5.html">ex2-5.html</a>
-        <a href="../02/ex2-6.html">ex2-6.html</a>
-        <a href="../02/ex2-7.html">ex2-7.html</a>
-        <a href="../02/ex2-8.html">ex2-8.html</a>
-        <a href="../02/ex2-9.html">ex2-9.html</a>
-        <a href="../02/ex2-10.html">ex2-10.html</a>
-        <a href="../02/ex2-11.html">ex2-11.html</a>
-        <a href="../02/ex2-12.html">ex2-12.html</a>
-        <a href="../02/ex2-14.html">ex2-14.html</a>
-        <a href="../02/ex2-14-1.html">ex2-14-1.html</a>
+      <script>
+        document.getElementById('show-all-pages').addEventListener('click', async function(){
+          var container = document.getElementById('all-pages');
+          if(container.style.display === 'none'){
+            // 시도: pages.json 로드
+            try{
+              var res = await fetch('pages.json');
+              if(!res.ok) throw new Error('no pages.json');
+              var data = await res.json();
+              container.innerHTML = '';
+              for(const folder of Object.keys(data.folders||{})){
+                var h = document.createElement('div');
+                h.style.fontWeight = '700';
+                h.style.padding = '6px 0 2px 0';
+                h.textContent = folder + ' (' + data.folders[folder].length + ')';
+                container.appendChild(h);
+                var ul = document.createElement('div');
+                ul.style.display='flex'; ul.style.flexDirection='column'; ul.style.gap='6px'; ul.style.padding='4px 0 10px 8px';
+                for(const p of data.folders[folder]){
+                  var a = document.createElement('a');
+                  a.href = p;
+                  a.textContent = p;
+                  a.style.color = '#4a5568'; a.style.textDecoration='none';
+                  container.appendChild(a);
+                }
+              }
+            }catch(e){
+              container.innerHTML = '<div style="color:#777; padding:8px 0;">pages.json 파일이 없습니다. 필요한 경우 전체 목록을 생성해 드리겠습니다.</div>';
+            }
+            container.style.display = 'flex';
+            container.style.flexDirection = 'column';
+          } else {
+            container.style.display = 'none';
+          }
+        });
+      </script>
         <a href="../02/ex2-15.html">ex2-15.html</a>
         <a href="../02/ex2-16.html">ex2-16.html</a>
         <a href="../02/ex2-17.html">ex2-17.html</a>
